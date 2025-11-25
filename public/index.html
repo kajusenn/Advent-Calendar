@@ -1,13 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
-    <meta charset="UTF-8" />
-    <title>Windows</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalendarz Adwentowy</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Lista Windows</h1>
-    <div id="windows">
-        <!-- Windows will be dynamically inserted here -->
+    <h1 class="title">🎄 Kalendarz Adwentowy 🎁</h1>
+
+        <div id="windows" class="calendar"></div>
+
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="message">brak</div>
+        </div>
     </div>
 
     <script src="script.js"></script>
