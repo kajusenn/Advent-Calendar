@@ -1,0 +1,137 @@
+/* Ogólne kolory i styl */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ffebf0, #fff5e6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Nagłówek */
+.title {
+    margin-top: 20px;
+    font-size: 2.4rem;
+    color: #9b2335;
+    font-weight: 700;
+    text-align: center;
+    text-shadow: 0 3px 10px rgba(255, 180, 180, 0.5);
+}
+
+/* Kalendarz – responsywny układ */
+.calendar {
+    margin-top: 30px;
+    display: grid;
+    gap: 15px;
+    padding: 20px;
+    width: 90%;
+    max-width: 1000px;
+}
+
+/*  TELEFONY – 2 kolumny */
+@media screen and (max-width: 600px) {
+    .calendar {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* TABLETY – 4 kolumny */
+@media screen and (min-width: 600px) and (max-width: 1000px) {
+    .calendar {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* KOMPUTERY – 6 kolumn */
+@media screen and (min-width: 1000px) {
+    .calendar {
+        grid-template-columns: repeat(6, 1fr);
+    }
+}
+
+/* Okienka */
+.window {
+    background: #ffffffdd;
+    border-radius: 20px;
+    border: 2px solid #e4b1c2;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    transition: 0.35s ease;
+    box-shadow: 0 5px 15px rgba(255, 153, 153, 0.25);
+}
+
+/* Numer */
+.number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #b83259;
+}
+
+/* Animacja po kliknięciu */
+.window.opened {
+    transform: scale(1.07);
+    background: #ffe6ec;
+    border-color: #d67b95;
+    box-shadow: 0 8px 20px rgba(255, 150, 188, 0.4);
+}
+
+/* Efekt hover na komputerze */
+@media (hover: hover) {
+    .window:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 25px rgba(255, 120, 150, 0.35);
+    }
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    background: #fff0f6;
+    padding: 25px;
+    border-radius: 20px;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(255, 140, 170, 0.4);
+    animation: pop 0.3s ease;
+}
+
+.close {
+    font-size: 2rem;
+    cursor: pointer;
+    float: right;
+    margin-top: -10px;
+    color: #b83259;
+}
+
+.message {
+    margin-top: 15px;
+    font-size: 1.3rem;
+    color: #a22244;
+}
+
+/* Animacje */
+@keyframes pop {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
