@@ -6,33 +6,56 @@ fetch("http://localhost:3000/windows")
 
         data.forEach(win => {
 
-            // główny element okienka
             const item = document.createElement("div");
             item.classList.add("window");
 
-            // numer w środku
-            const num = document.createElement("span");
-            num.classList.add("number");
-            num.textContent = win.id;
+            // FRONT – numer okienka
+            const front = document.createElement("div");
+            front.classList.add("front");
+            front.textContent = win.id;
 
-            // jeśli okno było otwarte → dodaj klasę opened
+            // BACK – wiadomość / zdjęcie
+            const back = document.createElement("div");
+            back.classList.add("back");
+            back.innerHTML = win.message; // tu pojawi się tekst
+
             if (win.opened) {
                 item.classList.add("opened");
             }
 
-            // kliknięcie — wysyłamy PUT
             item.addEventListener("click", () => {
                 fetch(`http://localhost:3000/windows/${win.id}`, {
-                    method: "PUT"
+            method: "PUT"
                 })
                 .then(res => res.json())
                 .then(updated => {
                     item.classList.add("opened");
+
+                    const modal = document.getElementById("modal");
+                    const modalMsg = document.getElementById("modal-message");
+
+                   modalMsg.innerHTML = updated.message;  // <<< to jest klucz
+
+                    modal.style.display = "flex";
                 });
             });
 
-            item.appendChild(num);
+
+            item.appendChild(front);
+            item.appendChild(back);
             container.appendChild(item);
         });
 
-    });
+});
+
+// --- zamykanie modala ---
+document.querySelector(".close").addEventListener("click", () => {
+    document.getElementById("modal").style.display = "none";
+});
+
+// zamknięcie klikając w tło
+document.getElementById("modal").addEventListener("click", (e) => {
+    if (e.target.id === "modal") {
+        document.getElementById("modal").style.display = "none";
+    }
+});
