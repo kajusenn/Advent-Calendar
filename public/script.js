@@ -1,3 +1,12 @@
+// Funkcja dekodująca base64
+function decodeBase64(str) {
+    try {
+        return atob(str);
+    } catch {
+        return str;
+    }
+}
+
 fetch("http://localhost:3000/windows")
     .then(res => res.json())
     .then(data => {
@@ -9,51 +18,64 @@ fetch("http://localhost:3000/windows")
             const item = document.createElement("div");
             item.classList.add("window");
 
-            // FRONT – numer okienka
             const front = document.createElement("div");
             front.classList.add("front");
             front.textContent = win.id;
 
-            // BACK – wiadomość / zdjęcie
             const back = document.createElement("div");
             back.classList.add("back");
-            back.innerHTML = win.message; // tu pojawi się tekst
+
+            // NIE WSTAWIAMY wiadomości do okienka, żeby nie było jej w inspect element
+            back.innerHTML = "";
 
             if (win.opened) {
                 item.classList.add("opened");
             }
 
+            // Funkcja pokazująca modal
+            const showModal = (encodedMsg) => {
+                const modal = document.getElementById("modal");
+                const modalMsg = document.getElementById("modal-message");
+
+                modalMsg.innerHTML = decodeBase64(encodedMsg);
+                modal.style.display = "flex";
+            };
+
             item.addEventListener("click", () => {
+
+                // jeśli już otwarte → tylko odczytujemy zakodowaną wersję z win.message
+                if (item.classList.contains("opened")) {
+                    back.innerHTML = decodeBase64(win.message);
+                    showModal(win.message);
+                    return;
+                }
+
+                // jeśli zamknięte → najpierw otwieramy w backendzie
                 fetch(`http://localhost:3000/windows/${win.id}`, {
-            method: "PUT"
+                    method: "PUT"
                 })
-                .then(res => res.json())
-                .then(updated => {
-                    item.classList.add("opened");
+                    .then(res => res.json())
+                    .then(updated => {
+                        item.classList.add("opened");
+                        back.innerHTML = decodeBase64(updated.message);
+                        showModal(updated.message);
 
-                    const modal = document.getElementById("modal");
-                    const modalMsg = document.getElementById("modal-message");
-
-                   modalMsg.innerHTML = updated.message;  // <<< to jest klucz
-
-                    modal.style.display = "flex";
-                });
+                    });
             });
-
 
             item.appendChild(front);
             item.appendChild(back);
             container.appendChild(item);
         });
 
-});
+    });
 
-// --- zamykanie modala ---
+// zamykanie modala
 document.querySelector(".close").addEventListener("click", () => {
     document.getElementById("modal").style.display = "none";
 });
 
-// zamknięcie klikając w tło
+// zamykanie klikając poza okienkiem
 document.getElementById("modal").addEventListener("click", (e) => {
     if (e.target.id === "modal") {
         document.getElementById("modal").style.display = "none";
