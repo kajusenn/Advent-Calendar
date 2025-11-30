@@ -7,6 +7,20 @@ function decodeBase64(str) {
     }
 }
 
+// AUTOMATYCZNE BLOKOWANIE OD 1 DO 24 GRUDNIA
+function canOpen(id) {
+    const today = new Date();
+
+    const currentDay = today.getDate();
+    const currentMonth = today.getMonth() + 1;
+
+    // TYLKO GRUDZIEŃ DZIAŁA
+    if (currentMonth !== 12) return false;
+
+    // Możesz otworzyć tylko jeśli numer okienka <= numer dnia
+    return id <= currentDay;
+}
+
 fetch("http://localhost:3000/windows")
     .then(res => res.json())
     .then(data => {
@@ -24,15 +38,10 @@ fetch("http://localhost:3000/windows")
 
             const back = document.createElement("div");
             back.classList.add("back");
-
-            // NIE WSTAWIAMY wiadomości do okienka, żeby nie było jej w inspect element
             back.innerHTML = "";
 
-            if (win.opened) {
-                item.classList.add("opened");
-            }
+            if (win.opened) item.classList.add("opened");
 
-            // Funkcja pokazująca modal
             const showModal = (encodedMsg) => {
                 const modal = document.getElementById("modal");
                 const modalMsg = document.getElementById("modal-message");
@@ -43,14 +52,20 @@ fetch("http://localhost:3000/windows")
 
             item.addEventListener("click", () => {
 
-                // jeśli już otwarte → tylko odczytujemy zakodowaną wersję z win.message
+                // BLOKADA KALENDARZA (1–24 grudnia)
+                if (!canOpen(win.id)) {
+                    alert("ALERT DATE:  " + win.id + ".12");
+                    return;
+                }
+
+                // Gdy już otwarte
                 if (item.classList.contains("opened")) {
                     back.innerHTML = decodeBase64(win.message);
                     showModal(win.message);
                     return;
                 }
 
-                // jeśli zamknięte → najpierw otwieramy w backendzie
+                // Otwieranie w backendzie
                 fetch(`http://localhost:3000/windows/${win.id}`, {
                     method: "PUT"
                 })
@@ -59,7 +74,6 @@ fetch("http://localhost:3000/windows")
                         item.classList.add("opened");
                         back.innerHTML = decodeBase64(updated.message);
                         showModal(updated.message);
-
                     });
             });
 
