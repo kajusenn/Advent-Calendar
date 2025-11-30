@@ -1,5 +1,6 @@
+// coding: utf-8
 const windows = [
-    { id: 1, opened: false, message: "MESSAGE" },
+    { id: 1, opened: false, message: "KOCHAM CIE misia" },
     { id: 2, opened: false, message: "MESSAGE" },
     { id: 3, opened: false, message: "MESSAGE" },
     { id: 4, opened: false, message: "MESSAGE" },
@@ -22,16 +23,7 @@ const windows = [
     { id: 21, opened: false, message: "MESSAGE" },
     { id: 22, opened: false, message: "MESSAGE" },
     { id: 23, opened: false, message: "MESSAGE" },
-    { id: 24, opened: false, message: "MESSAGE" },
+    { id: 24, opened: false, message: "MESSAGE" }
 ];
-
-// Automatycznie generujemy resztę (od 6 do 24, bez wiadomości)
-for (let i = 6; i <= 24; i++) {
-    windows.push({
-        id: i,
-        opened: false,
-        message: "Brak wiadomości — dodasz później ❤️"
-    });
-}
 
 module.exports = windows;
