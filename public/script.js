@@ -1,11 +1,4 @@
-// Funkcja dekodująca base64
-function decodeBase64(str) {
-    try {
-        return atob(str);
-    } catch {
-        return str;
-    }
-}
+
 
 // AUTOMATYCZNE BLOKOWANIE OD 1 DO 24 GRUDNIA
 function canOpen(id) {
@@ -42,25 +35,25 @@ fetch("http://localhost:3000/windows")
 
             if (win.opened) item.classList.add("opened");
 
-            const showModal = (encodedMsg) => {
+            const showModal = (msg) => {
                 const modal = document.getElementById("modal");
                 const modalMsg = document.getElementById("modal-message");
 
-                modalMsg.innerHTML = decodeBase64(encodedMsg);
+                modalMsg.innerHTML = msg;
                 modal.style.display = "flex";
             };
 
             item.addEventListener("click", () => {
 
                 // BLOKADA KALENDARZA (1–24 grudnia)
-                if (!canOpen(win.id)) {
-                    alert("ALERT DATE:  " + win.id + ".12");
-                    return;
-                }
+                // if (!canOpen(win.id)) {
+                //     alert("ALERT DATE:  " + win.id + ".12");
+                //     return;
+                // }
 
                 // Gdy już otwarte
                 if (item.classList.contains("opened")) {
-                    back.innerHTML = decodeBase64(win.message);
+                    back.innerHTML = win.message;
                     showModal(win.message);
                     return;
                 }
@@ -72,7 +65,7 @@ fetch("http://localhost:3000/windows")
                     .then(res => res.json())
                     .then(updated => {
                         item.classList.add("opened");
-                        back.innerHTML = decodeBase64(updated.message);
+                        back.innerHTML = updated.message;
                         showModal(updated.message);
                     });
             });
