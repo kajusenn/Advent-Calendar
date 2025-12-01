@@ -1,6 +1,6 @@
 // coding: utf-8
 const windows = [
-    { id: 1, opened: false, message: "KOCHAM CIE misia" },
+    { id: 1, opened: false, message: "MESSAGE" },
     { id: 2, opened: false, message: "MESSAGE" },
     { id: 3, opened: false, message: "MESSAGE" },
     { id: 4, opened: false, message: "MESSAGE" },
