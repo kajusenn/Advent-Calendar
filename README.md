@@ -165,14 +165,6 @@ If you need the **frontend-only version with data saving feature**, reach out to
 
 ---
 
-## 🐛 Known Issues
-
-- Messages are visible in browser developer tools before opening (by design for simplicity)
-- Images must be optimized before adding (large images slow down the page)
-- Works best in modern browsers (Chrome, Firefox, Safari, Edge)
-
----
-
 ## 🎯 Future Ideas
 
 - [ ] Add sound effects when opening windows
