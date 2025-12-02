@@ -185,7 +185,7 @@ This project is free to use. You can modify it and share it with others.
 
 **Author:** kajusenn
 
-If you want the **frontend-only version without Node.js**, please contact me through GitHub.
+If you want the **frontend-only version without Node.js**, please contact me through GitHub/Discord/Mail.
 
 If you find bugs or have questions, open an issue on GitHub.
 
