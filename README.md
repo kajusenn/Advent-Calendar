@@ -146,18 +146,22 @@ The calendar automatically changes layout based on screen size:
 
 ---
 
-## ⚠️ Frontend-Only Version
+## ⚠️ Frontend-Only Version with Data Saving
 
-**IMPORTANT:** This repository contains a **Node.js backend version** of the advent calendar.
+**IMPORTANT:** This repository contains a **Node.js backend version** of the advent calendar with database and data saving features.
 
-If you want the **simple frontend-only version** (just HTML, CSS, and JavaScript without Node.js), please **contact me** for the files.
+If you want the **simple frontend-only version** (just HTML, CSS, and JavaScript) **but still want to save which windows were opened**, please **contact me** for the modified files.
 
 ### Why Two Versions?
 
-- **Frontend-only**: Simple, just open `index.html` in browser
-- **Backend version**: Has server features, needs Node.js installation
+- **Frontend-only with saving**: Simple setup, saves opened windows in browser storage (no server needed)
+- **Backend version (this repo)**: Full server with Node.js, database, and advanced features
 
-Most people will want the frontend-only version because it's easier to use.
+The frontend version with saving is perfect if you want easy setup but still remember which windows you already opened.
+
+### Contact Me
+
+If you need the **frontend-only version with data saving feature**, reach out to me on GitHub and I will send you the files.
 
 ---
 
