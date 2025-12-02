@@ -195,7 +195,7 @@ If you find bugs or have questions, open an issue on GitHub.
 
 Made with ❤️ for special people in my life.
 
-Special thanks to Claude AI for helping with the code.
+Special thanks to AI for helping with the code.
 
 ---
 
